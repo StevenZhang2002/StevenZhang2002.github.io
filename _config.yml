@@ -10,7 +10,7 @@ owner:
   avatar: BowenZhang.jpg
   # bio: Two roads diverged in woods, I took the one less traveled by.
   email: zhangbowen0702@163.com
-  cv: https://caihanlin.com/file/CV-HanlinCAI.pdf
+  cv: https://caihanlin.com/file/CV Bowen Zhang.pdf
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   github: StevenZhang2002
   linkedin: hanlincai
@@ -76,7 +76,7 @@ kramdown:
 
 # disqus settings:
 disqus:
-  shortname: lancecai
+  shortname: Bowen
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "minimal-mistakes.sublime-project", "minimal-mistakes.sublime-workspace"]
