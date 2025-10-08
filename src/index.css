@@ -1,3 +1,4 @@
+/* 最小化 reset，避免与 Semi 冲突 */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,12 +23,18 @@ a:hover {
   color: #535bf2;
 }
 
+/* 去除全局居中，由页面/组件自行布局 */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -66,3 +73,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+html, body, #root { height: 100%; }
+body { margin: 0; }
