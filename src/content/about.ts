@@ -6,9 +6,9 @@ export type AboutContent = {
   blurb: string;
   location: string;
   stack: string[];
-  currently: string;
+  currentTags: { text: string; tone?: "success" | "info" | "warning" | "danger" | "neutral" }[];
   badges: string[];
-  educationRecords: { school: string; degree: string; period: string }[];
+  educationRecords: { school: string; degree: string; period: string; logoUrl?: string }[];
   resumeUrl?: string;
   contactEmail?: string;
 };
@@ -17,16 +17,20 @@ export const aboutContent: AboutContent = {
   name: "Zhang Bowen(Steven)",
   avatarUrl: "/缩减_bowen.jpg",
   subtitle:
-    "Frontend / Full-stack developer. Building clean UI and useful tools.",
+    "Motivated Backend developer. Building clean UI and useful tools.",
   blurb:
     "I build performant and accessible interfaces with a focus on developer experience. I enjoy shipping pragmatic solutions and polishing details.",
-  location: "Beijing, China",
+  location: "City, Country",
   stack: ["React", "TypeScript", "Node.js", "Vite"],
-  currently: "Open to opportunities / Freelancing",
+  currentTags: [
+    { text: "Open to opportunities", tone: "success" },
+    { text: "Freelancing", tone: "info" },
+  ],
   badges: ["React", "TypeScript", "Node.js", "Vite"],
   educationRecords: [
-    { school: "University XYZ", degree: "B.S. Computer Science", period: "2017–2021" },
-    { school: "University ABC", degree: "M.S. Software Engineering", period: "2021–2023" },
+    { school: "National University of Singapore", degree: "M.Tech. Software Engineering", period: "2024–2025", logoUrl: "/ucd-logo.png" },
+    { school: "Beijing University of Technology", degree: "B.ENG. Software Engineering", period: "2020–2024" },
+    { school: "University College Dublin", degree: "B.ENG. Software Engineering", period: "2020–2024" },
   ],
   resumeUrl: "/resume.pdf",
   contactEmail: "you@example.com",

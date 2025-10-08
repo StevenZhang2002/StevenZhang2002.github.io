@@ -42,13 +42,20 @@ export default function About() {
             <span>Stack</span>
             <span>{aboutContent.stack.join(" · ")}</span>
             <span>Currently</span>
-            <span>{aboutContent.currently}</span>
+            <div className="kv-tags badges">
+              {aboutContent.currentTags.map((t) => (
+                <span
+                  key={t.text}
+                  className={`badge ${t.tone ? `badge--${t.tone}` : "badge--neutral"}`}
+                >
+                  {t.text}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="badges">
             {aboutContent.badges.map((b) => (
-              <span key={b} className="badge">
-                {b}
-              </span>
+              <span key={b} className="badge">{b}</span>
             ))}
           </div>
         </article>
@@ -58,11 +65,28 @@ export default function About() {
           <ul className="edu-list">
             {aboutContent.educationRecords.map((rec) => (
               <li key={`${rec.school}-${rec.period}`}>
-                <div className="edu-header">
-                  <strong>{rec.school}</strong>
-                  <span className="edu-period">{rec.period}</span>
+                <div className="edu-item">
+                  <div className="edu-logo">
+                    {rec.logoUrl ? (
+                      <img 
+                        src={rec.logoUrl} 
+                        alt={`${rec.school} logo`}
+                        className="edu-logo-img"
+                      />
+                    ) : (
+                      <div className="edu-logo-placeholder">
+                        {rec.school.split(' ').map(word => word[0]).join('').slice(0, 2)}
+                      </div>
+                    )}
+                  </div>
+                  <div className="edu-content">
+                    <div className="edu-header">
+                      <strong>{rec.school}</strong>
+                      <span className="edu-period">{rec.period}</span>
+                    </div>
+                    <div className="edu-degree">{rec.degree}</div>
+                  </div>
                 </div>
-                <div className="edu-degree">{rec.degree}</div>
               </li>
             ))}
           </ul>

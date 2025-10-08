@@ -1,4 +1,6 @@
-:root {
+/* 暗色主题（默认） */
+:root,
+[data-theme="dark"] {
   --bg: #0f1220;
   --surface: #171a2a;
   --text: #e5e7f3;
@@ -8,15 +10,37 @@
   --border: #2b2f47;
 }
 
+/* 亮色主题 */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --card: #ffffff;
+  --border: #e5e7eb;
+}
+
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
-  background: radial-gradient(1200px 600px at 10% 0%, #14172a 0%, #0f1220 35%, #0d1020 100%);
+  background: var(--bg);
   color: var(--text);
-  font-size: 18px;            /* 提升基础字号 */
-  line-height: 1.7;           /* 增加行高，提高可读性 */
+  font-size: 16px;
+  line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 亮色主题的渐变背景 */
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* 暗色主题的渐变背景 */
+[data-theme="dark"] body {
+  background: radial-gradient(1200px 600px at 10% 0%, #14172a 0%, #0f1220 35%, #0d1020 100%);
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -81,6 +105,7 @@ main.container {
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 0 0 1px rgba(110, 168, 254, 0.06), 0 10px 30px rgba(0,0,0,0.25);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .tags {
@@ -96,6 +121,9 @@ main.container {
   align-items: center;
   justify-content: space-between;
 }
+.footer .social a { margin-left: 12px; }
+
+/* About 页面样式 */
 .about-hero {
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -107,7 +135,7 @@ main.container {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  object-fit: cover; /* 图片填充裁剪 */
+  object-fit: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,12 +146,12 @@ main.container {
 }
 .about-title {
   margin: 0;
-  font-size: 32px;            /* 从 28px 提升到 32px */
+  font-size: 32px;
 }
 .about-subtitle {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 15px;            /* 增加副标题字号 */
+  font-size: 15px;
 }
 .about-actions {
   display: flex;
@@ -132,13 +160,14 @@ main.container {
 }
 .btn {
   display: inline-block;
-  padding: 10px 14px;         /* 适配更大的字号 */
+  padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid transparent;
   background: var(--accent);
-  color: #0f1220;
+  color: var(--bg);
   font-weight: 600;
-  font-size: 14px;            /* 按钮文字更清晰 */
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 .btn.secondary {
   background: var(--surface);
@@ -155,6 +184,7 @@ main.container {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .kv {
   display: grid;
@@ -174,9 +204,18 @@ main.container {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 6px 10px;
-  font-size: 13px;            /* 徽章文字稍微增大 */
+  font-size: 13px;
   color: var(--muted);
+  transition: all 0.3s ease;
 }
+
+/* 带色调的徽章 */
+.badge--success { background: #22c55e26; border-color: #22c55e66; color: #22c55e; }
+.badge--info    { background: #3b82f626; border-color: #3b82f666; color: #3b82f6; }
+.badge--warning { background: #f59e0b26; border-color: #f59e0b66; color: #f59e0b; }
+.badge--danger  { background: #ef444426; border-color: #ef444466; color: #ef4444; }
+.badge--neutral { background: var(--surface); border-color: var(--border); color: var(--muted); }
+
 .timeline {
   margin: 0;
   padding: 0;
@@ -200,6 +239,131 @@ main.container {
 .timeline li + li {
   margin-top: 8px;
 }
+
+/* 让 kv 中的标签和整页 badges 风格一致但无额外外边距 */
+.kv-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.kv .badges { margin-top: 0; }
+
+/* Education structured list */
+.edu-list { margin: 0; padding: 0; }
+.edu-list li {
+  list-style: none;
+  position: relative;
+  margin-left: 10px;
+  padding: 12px 0 12px 14px;
+  border-left: 2px solid var(--border);
+}
+.edu-list li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 24px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px rgba(110, 168, 254, 0.15);
+}
+
+.edu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.edu-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edu-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edu-logo-placeholder {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.edu-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.edu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.edu-period {
+  color: var(--muted);
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.edu-degree {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .edu-item {
+    gap: 12px;
+  }
+  
+  .edu-logo {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .edu-logo-placeholder {
+    font-size: 12px;
+  }
+  
+  .edu-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .edu-period {
+    margin-left: 0;
+  }
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text);
+}
+
+.theme-toggle:hover {
+  background: var(--card);
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
   .about-hero {
     grid-template-columns: 1fr;
@@ -210,38 +374,4 @@ main.container {
   .about-split {
     grid-template-columns: 1fr;
   }
-}
-.footer .social a { margin-left: 12px; }
-/* Education structured list */
-.edu-list { margin: 0; padding: 0; }
-.edu-list li {
-  list-style: none;
-  position: relative;
-  margin-left: 10px;
-  padding: 10px 0 10px 14px;
-  border-left: 2px solid var(--border);
-}
-.edu-list li::before {
-  content: "";
-  position: absolute;
-  left: -5px;
-  top: 18px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 2px rgba(110, 168, 254, 0.15);
-}
-.edu-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.edu-period {
-  color: var(--muted);
-  font-size: 12px;
-}
-.edu-degree {
-  color: var(--text);
-  margin-top: 4px;
 }

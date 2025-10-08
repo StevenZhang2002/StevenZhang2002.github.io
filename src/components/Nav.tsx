@@ -1,5 +1,6 @@
 import { Nav as SemiNav } from "@douyinfe/semi-ui";
 import { useLocation, useNavigate } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Nav() {
                 { itemKey: "resume", text: "Resume", onClick: () => navigate("/resume") },
                 { itemKey: "contact", text: "Contact", onClick: () => navigate("/contact") },
             ]}
+            footer={<ThemeToggle />}
         />
     );
 }
